@@ -76,3 +76,23 @@ ggplot() +
        subtitle = " 'the city of brotherly love' ")
 
 ggsave('philly_map.png', height = 10, width = 8, dpi = 300)
+
+# dark theme
+ggplot() +
+  geom_sf(data = landuse_lines, color = '#aa423a', fill = '#aa423a') +
+  geom_sf(data = leisure_lines, color = '#db783e', fill = '#db783e') +
+  geom_sf(data = natural_lines, color = '#db783e', fill = '#db783e')+
+  geom_sf(data = buildings_lines, color = '#f2e3d8', fill = '#f2e3d8',
+          linewidth = .2) +
+  geom_sf(data = roads_all_lines, color = '#024a43',linewidth = .3) +
+  theme_void() +
+  theme(plot.caption = element_text(hjust = .5, color = '#f2e3d8', 
+                                    family = 'roboto', size = 120),
+        plot.subtitle = element_text(hjust = .5, size = 40, family = 'abel',
+                                     color = '#f2e3d8'),
+        plot.background = element_rect(color = NA, fill = '#142d25')) +
+  labs(caption = 'Philadelphia, PA',
+       subtitle = " 'the city of brotherly love' ")
+
+ggsave('philly_map_dark.png', height = 10, width = 8, dpi = 300)
+  
