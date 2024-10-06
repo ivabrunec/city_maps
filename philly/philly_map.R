@@ -36,10 +36,6 @@ natural <- opq(bbox = bb) |>
   add_osm_feature(key = 'natural') |>
   osmdata_sf()
 
-river <- opq(bbox = bb) |>
-  add_osm_feature(key = 'water') |>
-  osmdata_sf()
-
 # circle
 # code from: https://github.com/AbdoulMa/30DayMapChallenge/blob/main/Day8/day8_2022.R
 long = -75.16366647413028
@@ -47,13 +43,13 @@ lat = 39.952585598153284
 
 center_proj <-
   tibble(long, lat) %>%
-  st_as_sf(coords = c("long", "lat"), crs = crs(roads_main$osm_lines))
+  st_as_sf(coords = c("long", "lat"), crs = crs(roads_all$osm_lines))
 
 dist <-  1000
 circle <- tibble(long, lat) %>%
-  st_as_sf(coords = c("long", "lat"), crs = crs(roads_main$osm_lines)) %>%
+  st_as_sf(coords = c("long", "lat"), crs = crs(roads_all$osm_lines)) %>%
   st_buffer(dist = dist) %>%
-  st_transform(crs = crs(roads_main$osm_lines))
+  st_transform(crs = crs(roads_all$osm_lines))
 
 
 roads_all_lines <- st_intersection(circle, roads_all$osm_lines)
